@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFD89FFF</color>
+    <color name="purple_500">#FFBA53FF</color>
+    <color name="purple_700">#FF7101BC</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+<!--    Versi 1.0 Naviku-->
+
+    <color name="purple_dark">#FF7101BC</color>
+    <color name="purple_light">#FFBA53FF</color>
+    <color name="purple_superlight">#FFD89FFF</color>
+    <color name="red_flash_auto">#FFAB004D</color>
+    <color name="red_flash_off">#FF700032</color>
+    <color name="red_danger">#FFAF0000</color>
+    <color name="green__success_unduh_zoom_2x">#FF00611C</color>
+    <color name="green_zoom_1x">#FF00615B</color>
+    <color name="teal_beranda">#FF005C70</color>
+    <color name="blue_buat">#FF004BBC</color>
+    <color name="brown_kirim">#FF9C3700</color>
+    <color name="black_01">#FF222222</color>
+    <color name="black_02">#FF363636</color>
+    <color name="black_03">#FF434343</color>
+    <color name="black_04">#A6000000</color>
+    <color name="white_01">#FFFFFFFF</color>
+</resources>
