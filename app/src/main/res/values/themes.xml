@@ -12,5 +12,9 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+
+<!--            font-->
+        <item name="android:fontFamily">@font/Inter-Bold</item>
+
     </style>
 </resources>
