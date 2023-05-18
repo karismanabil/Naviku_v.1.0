@@ -1,11 +1,11 @@
 <resources>
     <string name="app_name">naviku_versi_karisma</string>
-    <string name="flash_auto">Flash Auto</string>
-    <string name="zoom2x">Zoom 2x</string>
-    <string name="kodeku">Kodeku</string>
+    <string name="flash_auto">Flash</string>
+    <string name="zoom2x">Zoom 2 Kali</string>
+    <string name="kodeku">Halaman Kodeku</string>
     <string name="settings">Settings</string>
-    <string name="buat">Buat</string>
-    <string name="unduh">Unduh</string>
-    <string name="kirim">Kirim</string>
-    <string name="beranda">Beranda</string>
+    <string name="buat">Buat Kode Pribadi</string>
+    <string name="unduh">Unduh Seluruh Kode</string>
+    <string name="kirim">Kirim Seluruh Kode</string>
+    <string name="beranda">Kembali ke Halaman Beranda</string>
 </resources>
