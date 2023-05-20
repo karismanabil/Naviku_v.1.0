@@ -8,6 +8,7 @@ import android.widget.ImageButton
 
 class Kodeku : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.KodekuTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_kodeku)
 

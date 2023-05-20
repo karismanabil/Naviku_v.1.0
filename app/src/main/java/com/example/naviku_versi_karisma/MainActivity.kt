@@ -37,9 +37,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.Theme_Naviku_versi_karisma)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
 
 
         //sharedd preference
