@@ -1,8 +1,10 @@
 package com.example.naviku_versi_karisma
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.content.pm.PackageManager
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
@@ -20,7 +22,14 @@ import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import com.google.zxing.ResultPoint
+import com.journeyapps.barcodescanner.BarcodeCallback
+import com.journeyapps.barcodescanner.BarcodeResult
+import com.journeyapps.barcodescanner.DecoratedBarcodeView
+import java.util.*
 
 class MainActivity : AppCompatActivity(), View.OnClickListener{
 
@@ -34,12 +43,25 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
     private lateinit var sharedPref: SharedPreferences
     private lateinit var editor: SharedPreferences.Editor
 
+    private lateinit var barcodeView: DecoratedBarcodeView
+    private var timer: Timer? = null
+    private var isProcessing: Boolean = false
+    private lateinit var output: TextView
+
+    companion object {
+        private const val CAMERA_PERMISSION_REQUEST_CODE = 1001
+    }
+
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Theme_Naviku_versi_karisma)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        barcodeView = findViewById(R.id.scannerView)
+        output = findViewById(R.id.output)
+
 
 
         //sharedd preference
@@ -80,28 +102,76 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
             am.sendAccessibilityEvent(event)
         }
 
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+            startCamera()
+        } else {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.CAMERA),
+                CAMERA_PERMISSION_REQUEST_CODE
+            )
+        }
+
     }
 
 
     override fun onResume() {
         super.onResume()
-        // Mendapatkan instance dari SensorManager
-        sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
-        // Mendapatkan instance dari light sensor
-        lightSensor = sensorManager?.getDefaultSensor(Sensor.TYPE_LIGHT)
-        // Mendaftarkan listener untuk light sensor jika mode flash AUTO
-        if (flashMode == 0) {
-            registerLightSensorListener()
-        }
+        barcodeView.resume()
+//        // Mendapatkan instance dari SensorManager
+//        sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
+//        // Mendapatkan instance dari light sensor
+//        lightSensor = sensorManager?.getDefaultSensor(Sensor.TYPE_LIGHT)
+//        // Mendaftarkan listener untuk light sensor jika mode flash AUTO
+//        if (flashMode == 0) {
+//            registerLightSensorListener()
+//        }
     }
 
     override fun onPause() {
         super.onPause()
+        barcodeView.pause()
+        timer?.cancel()
+        timer = null
+
         // Mencopot listener saat activity tidak aktif
         if (flashMode == 0) {
             // Mencopot listener saat activity tidak aktif
             sensorManager?.unregisterListener(sensorEventListener)
         }
+    }
+
+    private fun startCamera() {
+        barcodeView.decodeContinuous(object : BarcodeCallback {
+            override fun barcodeResult(result: BarcodeResult?) {
+                if (!isProcessing) {
+                    isProcessing = true
+
+                    result?.let {
+                        val text = it.text
+                        output.text = "${it.text}"
+
+                    }
+
+                    // Menghentikan timer yang ada sebelumnya
+                    timer?.cancel()
+
+                    // Memulai timer untuk pemindaian ulang setelah 5 detik
+                    timer = Timer()
+                    timer?.schedule(object : TimerTask() {
+                        override fun run() {
+                            runOnUiThread {
+                                isProcessing = false
+                                barcodeView.resume()
+                            }
+
+                        }
+                    }, 5000)
+                }
+            }
+
+            override fun possibleResultPoints(resultPoints: MutableList<ResultPoint>?) {}
+        })
     }
 
     private fun registerLightSensorListener() {
