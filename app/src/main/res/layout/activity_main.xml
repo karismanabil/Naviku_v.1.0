@@ -8,12 +8,21 @@
     android:background="@color/black_01"
     tools:context=".MainActivity">
 
+    <com.journeyapps.barcodescanner.DecoratedBarcodeView
+        android:id="@+id/scannerView"
+        android:layout_width="match_parent"
+        android:layout_height="700dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/strip"/>
+
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/output"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/white_01"
         android:text="Hello World!"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,6 +30,7 @@
         app:layout_constraintVertical_bias="0.441" />
 
     <View
+        android:id="@+id/strip"
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:background="@color/white_01"
