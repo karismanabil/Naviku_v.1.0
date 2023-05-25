@@ -111,7 +111,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
             override fun onSensorChanged(event: SensorEvent?) {
                 if (event != null && event.sensor.type == Sensor.TYPE_LIGHT) {
                     val lightValue = event.values[0]
-                    if (lightValue < 10) { // Ubah nilai 10 sesuai dengan kebutuhan
+                    if (lightValue < 1) { // Ubah nilai 10 sesuai dengan kebutuhan
                         val cameraListId = CameraM.cameraIdList[0]
                         CameraM.setTorchMode(cameraListId, true)
                     } else {
