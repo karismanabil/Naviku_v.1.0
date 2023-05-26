@@ -14,6 +14,7 @@ import android.hardware.camera2.CameraManager
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.speech.tts.TextToSpeech
 import android.util.TypedValue
 import android.view.View
 import android.view.accessibility.AccessibilityEvent
@@ -47,6 +48,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
     private var timer: Timer? = null
     private var isProcessing: Boolean = false
     private lateinit var output: TextView
+
+    private lateinit var tts: TextToSpeech
 
     companion object {
         private const val CAMERA_PERMISSION_REQUEST_CODE = 1001
@@ -112,6 +115,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
             )
         }
 
+        tts = TextToSpeech(this) { status ->
+            if (status != TextToSpeech.ERROR) {
+                // Set language to default
+                tts.language = Locale("id", "ID")
+            }
+        }
+
     }
 
 
@@ -150,7 +160,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
                     result?.let {
                         val text = it.text
                         output.text = "${it.text}"
-
+                        tts.speak(text, TextToSpeech.QUEUE_FLUSH, null, null)
                     }
 
                     // Menghentikan timer yang ada sebelumnya
@@ -166,7 +176,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
                             }
 
                         }
-                    }, 5000)
+                    }, 1300)
                 }
             }
 
