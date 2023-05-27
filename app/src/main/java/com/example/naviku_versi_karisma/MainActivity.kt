@@ -36,25 +36,21 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
 
     private lateinit var CameraM : CameraManager
     private lateinit var flashButton:ImageButton
+    private lateinit var sharedPref: SharedPreferences
+    private lateinit var editor: SharedPreferences.Editor
+    private lateinit var barcodeView: DecoratedBarcodeView
+    private lateinit var output: TextView
+    private lateinit var tts: TextToSpeech
     private var sensorManager: SensorManager? = null
     private var lightSensor: Sensor? = null
     private var sensorEventListener: SensorEventListener? = null
     private var flashMode = 0
-
-    private lateinit var sharedPref: SharedPreferences
-    private lateinit var editor: SharedPreferences.Editor
-
-    private lateinit var barcodeView: DecoratedBarcodeView
     private var timer: Timer? = null
     private var isProcessing: Boolean = false
-    private lateinit var output: TextView
-
-    private lateinit var tts: TextToSpeech
 
     companion object {
         private const val CAMERA_PERMISSION_REQUEST_CODE = 1001
     }
-
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,8 +60,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
 
         barcodeView = findViewById(R.id.scannerView)
         output = findViewById(R.id.output)
-
-
 
         //sharedd preference
         sharedPref = getSharedPreferences("FlashPrefs", Context.MODE_PRIVATE)
@@ -80,7 +74,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
         // untuk pindah halaman
         val imageButtonKodeku: ImageButton = findViewById(R.id.imageButtonKodeku)
         imageButtonKodeku.setOnClickListener(this)
-
 
         // Atur ikon tombol flash sesuai dengan mode flash yang tersimpan
         when (flashMode) {
@@ -122,8 +115,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
             }
         }
 
+        val scannerView: DecoratedBarcodeView = findViewById(R.id.scannerView)
+        scannerView.statusView.text = ""
     }
-
 
     override fun onResume() {
         super.onResume()
@@ -156,10 +150,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
             override fun barcodeResult(result: BarcodeResult?) {
                 if (!isProcessing) {
                     isProcessing = true
-
                     result?.let {
                         val text = it.text
                         output.text = "${it.text}"
+                        tts.setSpeechRate(4f)
                         tts.speak(text, TextToSpeech.QUEUE_FLUSH, null, null)
                     }
 
@@ -174,12 +168,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
                                 isProcessing = false
                                 barcodeView.resume()
                             }
-
                         }
                     }, 1300)
                 }
             }
-
             override fun possibleResultPoints(resultPoints: MutableList<ResultPoint>?) {}
         })
     }
@@ -200,7 +192,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
                     }
                 }
             }
-
             override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
             }
         }
@@ -242,7 +233,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
             }
         }
     }
-
 
     override fun onClick(v: View?) {
         when (v?.id) {

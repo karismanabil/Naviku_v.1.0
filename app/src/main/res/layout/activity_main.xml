@@ -21,7 +21,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:background="@color/white_01"
-        android:text="Hello World!"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="@+id/scannerView"
         app:layout_constraintStart_toStartOf="@+id/scannerView"
