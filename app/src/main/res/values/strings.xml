@@ -10,4 +10,5 @@
     <string name="beranda">Kembali ke Halaman Beranda</string>
     <string name="naviku">Naviku</string>
     <string name="halaman_kodeku">Halaman Kodeku</string>
+    <string name="default_hasil">Lakukan Pemindaian dengan mengarahkan kamera ke QR Code</string>
 </resources>
