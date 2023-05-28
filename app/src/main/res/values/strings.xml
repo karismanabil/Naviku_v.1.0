@@ -10,4 +10,12 @@
     <string name="beranda">Kembali ke Halaman Beranda</string>
     <string name="naviku">Naviku</string>
     <string name="halaman_kodeku">Halaman Kodeku</string>
+
+    <string-array name="data_category">
+        <item>Kode Pribadi</item>
+    </string-array>
+
+    <integer-array name="data_icon">
+        <item>@drawable/kode_pribadi</item>
+    </integer-array>
 </resources>
