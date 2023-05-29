@@ -4,6 +4,75 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.category_detail.CategoryDetailActivity">
+    android:orientation="vertical"
+    android:background="@color/black_01"
+    tools:context=".ui.kodeku.Kodeku">
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/white_01"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:background="@color/black_02"
+        android:gravity="center_vertical|center_horizontal"
+        android:orientation="horizontal"
+        android:paddingHorizontal="18dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="34dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageButton
+            android:id="@+id/imageButtonBuat"
+            style="@style/Widget.AppCompat.ImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="6dp"
+            android:layout_weight="0"
+            android:background="@color/black_02"
+            android:contentDescription="@string/buat"
+            app:srcCompat="@drawable/buat" />
+
+        <ImageButton
+            android:id="@+id/imageButtonUnduh"
+            style="@style/Widget.AppCompat.ImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="6dp"
+            android:layout_weight="0"
+            android:background="@color/black_02"
+            android:contentDescription="@string/unduh"
+            app:srcCompat="@drawable/unduh" />
+
+        <ImageButton
+            android:id="@+id/imageButtonKirim"
+            style="@style/Widget.AppCompat.ImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="6dp"
+            android:layout_weight="0"
+            android:background="@color/black_02"
+            android:contentDescription="@string/kirim"
+            app:srcCompat="@drawable/kirim" />
+
+        <ImageButton
+            android:id="@+id/imageButton_Beranda"
+            style="@style/Widget.AppCompat.ImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="6dp"
+            android:layout_weight="0"
+            android:background="@color/black_02"
+            android:contentDescription="@string/beranda"
+            app:srcCompat="@drawable/beranda" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

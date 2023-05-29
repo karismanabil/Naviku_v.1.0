@@ -1,4 +1,4 @@
-package com.example.naviku_versi_karisma.ui.category_detail
+package com.example.naviku_versi_karisma.ui.kode_pribadi
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

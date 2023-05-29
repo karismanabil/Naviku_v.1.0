@@ -31,7 +31,7 @@
         android:theme="@style/SplashScreenTheme"
         tools:targetApi="31">
         <activity
-            android:name=".CategoryDetailActivity"
+            android:name=".ui.kode_pribadi.CategoryDetailActivity"
             android:exported="false" />
         <activity
             android:name=".ui.kodeku.Kodeku"

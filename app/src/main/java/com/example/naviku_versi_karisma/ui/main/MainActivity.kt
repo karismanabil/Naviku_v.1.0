@@ -190,7 +190,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                             }
 
                         }
-                    }, 1500)
+                    }, 3000)
                 }
             }
 
