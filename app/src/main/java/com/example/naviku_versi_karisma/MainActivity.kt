@@ -2,112 +2,55 @@ package com.example.naviku_versi_karisma
 
 import android.Manifest
 import android.content.Context
-import android.content.Intent
-import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
-import android.hardware.camera2.CameraCharacteristics
-import android.hardware.camera2.CameraManager
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
-import android.util.TypedValue
 import android.view.View
 import android.view.accessibility.AccessibilityEvent
 import android.view.accessibility.AccessibilityManager
 import android.widget.ImageButton
+import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
 import com.google.zxing.ResultPoint
 import com.journeyapps.barcodescanner.BarcodeCallback
 import com.journeyapps.barcodescanner.BarcodeResult
 import com.journeyapps.barcodescanner.DecoratedBarcodeView
 import java.util.*
 
-class MainActivity : AppCompatActivity(), View.OnClickListener{
+class MainActivity : AppCompatActivity(), SensorEventListener {
 
-    private lateinit var CameraM : CameraManager
+    //flash
     private lateinit var flashButton:ImageButton
-    private lateinit var sharedPref: SharedPreferences
-    private lateinit var editor: SharedPreferences.Editor
-    private lateinit var barcodeView: DecoratedBarcodeView
-    private lateinit var output: TextView
-    private lateinit var tts: TextToSpeech
-    private var sensorManager: SensorManager? = null
+    private var isFlashOn: Boolean = false
+    //sensor
+    private lateinit var sensorManager: SensorManager
     private var lightSensor: Sensor? = null
-    private var sensorEventListener: SensorEventListener? = null
-    private var flashMode = 0
+    private var isDark: Boolean = false
+    //scan
+    private lateinit var barcodeView: DecoratedBarcodeView
     private var timer: Timer? = null
     private var isProcessing: Boolean = false
-
+    private lateinit var output: TextView
+    //tts
+    private lateinit var tts: TextToSpeech
+    //camera permission
     companion object {
         private const val CAMERA_PERMISSION_REQUEST_CODE = 1001
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Theme_Naviku_versi_karisma)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        barcodeView = findViewById(R.id.scannerView)
-        output = findViewById(R.id.output)
-
-        //sharedd preference
-        sharedPref = getSharedPreferences("FlashPrefs", Context.MODE_PRIVATE)
-        editor = sharedPref.edit()
-        flashMode = sharedPref.getInt("flashMode", 0)
-
-        // flash
-        flashButton = findViewById(R.id.flashButt)
-        CameraM = getSystemService(Context.CAMERA_SERVICE) as CameraManager
-        flashButton.setOnClickListener{changeFlashMode(it)}
-
-        // untuk pindah halaman
-        val imageButtonKodeku: ImageButton = findViewById(R.id.imageButtonKodeku)
-        imageButtonKodeku.setOnClickListener(this)
-
-        // Atur ikon tombol flash sesuai dengan mode flash yang tersimpan
-        when (flashMode) {
-            0 -> {
-                flashButton.setImageResource(R.drawable.flash_auto)
-            }
-            1 -> {
-                flashButton.setImageResource(R.drawable.flash_off)
-            }
-            2 -> {
-                flashButton.setImageResource(R.drawable.flash_on)
-            }
-        }
-
-        //message
-        val am = getSystemService(Context.ACCESSIBILITY_SERVICE) as AccessibilityManager
-        if (am.isEnabled) {
-            val event = AccessibilityEvent.obtain()
-            event.eventType = AccessibilityEvent.TYPE_ANNOUNCEMENT
-            event.text.add("Flash akan otomatis menyala saat sensor mendeteksi kegelapan.\n " +
-                    "Anda dapat mengatur mode flash dengan memencet tombol flash")
-            am.sendAccessibilityEvent(event)
-        }
-
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
-            startCamera()
-        } else {
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf(Manifest.permission.CAMERA),
-                CAMERA_PERMISSION_REQUEST_CODE
-            )
-        }
-
+        // set tts bahasa indo
         tts = TextToSpeech(this) { status ->
             if (status != TextToSpeech.ERROR) {
                 // Set language to default
@@ -115,21 +58,58 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
             }
         }
 
+        //scanner
+        barcodeView = findViewById(R.id.scannerView)
+        output = findViewById(R.id.output)
+
+        //flash
+        flashButton = findViewById(R.id.flashButt)
+        flashButton.setOnClickListener {
+            if (isFlashOn) {
+                flashModeOff()
+            } else {
+                flashModeOn()
+            }
+        }
+
+//         sensor
+        // Inisialisasi SensorManager
+        sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
+        // Mendapatkan sensor cahaya
+        lightSensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT)
+//
+        //message untuk talkback (sementara)
+        val am = getSystemService(Context.ACCESSIBILITY_SERVICE) as AccessibilityManager
+        if (am.isEnabled) {
+            val event = AccessibilityEvent.obtain()
+            event.eventType = AccessibilityEvent.TYPE_ANNOUNCEMENT
+            event.text.add("Selamat Datang di Naviku\n " +
+                    "Memulai Pemindaian QR Code")
+            am.sendAccessibilityEvent(event)
+        }
+
+        //perizinan aplikasi
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), CAMERA_PERMISSION_REQUEST_CODE)
+        } else {
+            // Izin kamera sudah diberikan
+            startCamera()
+        }
+
+        //buat menghilangkan default text
         val scannerView: DecoratedBarcodeView = findViewById(R.id.scannerView)
         scannerView.statusView.text = ""
+
     }
 
     override fun onResume() {
         super.onResume()
         barcodeView.resume()
-//        // Mendapatkan instance dari SensorManager
-//        sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
-//        // Mendapatkan instance dari light sensor
-//        lightSensor = sensorManager?.getDefaultSensor(Sensor.TYPE_LIGHT)
-//        // Mendaftarkan listener untuk light sensor jika mode flash AUTO
-//        if (flashMode == 0) {
-//            registerLightSensorListener()
-//        }
+
+        // Mendaftar SensorEventListener untuk sensor cahaya
+        lightSensor?.let {
+            sensorManager.registerListener(this, it, SensorManager.SENSOR_DELAY_NORMAL)
+        }
     }
 
     override fun onPause() {
@@ -138,23 +118,46 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
         timer?.cancel()
         timer = null
 
-        // Mencopot listener saat activity tidak aktif
-        if (flashMode == 0) {
-            // Mencopot listener saat activity tidak aktif
-            sensorManager?.unregisterListener(sensorEventListener)
-        }
+        // Melepas pendaftaran SensorEventListener
+        sensorManager.unregisterListener(this)
+
     }
 
+//    flash
+    private fun flashModeOn() {
+        barcodeView.setTorchOn()
+        flashButton.setImageResource(R.drawable.flash_on) // Ganti dengan ikon flashmode on
+        isFlashOn = true
+        speakInstruction("Tombol flash diaktifkan")
+    }
+
+    private fun flashModeOff() {
+        barcodeView.setTorchOff()
+        flashButton.setImageResource(R.drawable.flash_off) // Ganti dengan ikon flashmode off
+        isFlashOn = false
+        speakInstruction("Tombol flash dinonaktifkan")
+    }
+//    flash close
+
+//    scan
     private fun startCamera() {
+        val linearLayout2: LinearLayout = findViewById(R.id.linearLayout2)
+        val strip2: View = findViewById(R.id.strip2)
         barcodeView.decodeContinuous(object : BarcodeCallback {
             override fun barcodeResult(result: BarcodeResult?) {
                 if (!isProcessing) {
                     isProcessing = true
+
                     result?.let {
                         val text = it.text
                         output.text = "${it.text}"
-                        tts.setSpeechRate(4f)
                         tts.speak(text, TextToSpeech.QUEUE_FLUSH, null, null)
+
+                        // Mengganti latar belakang LinearLayout menjadi hijau
+                        linearLayout2.setBackgroundColor(ContextCompat.getColor(output.context, R.color.green__success_unduh_zoom_2x))
+
+                        // Mengganti warna latar belakang View strip2 menjadi hijau
+                        strip2.setBackgroundColor(ContextCompat.getColor(output.context, R.color.green__line))
                     }
 
                     // Menghentikan timer yang ada sebelumnya
@@ -168,80 +171,54 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
                                 isProcessing = false
                                 barcodeView.resume()
                             }
+
                         }
-                    }, 1300)
+                    }, 1500)
                 }
             }
+
             override fun possibleResultPoints(resultPoints: MutableList<ResultPoint>?) {}
         })
     }
 
-    private fun registerLightSensorListener() {
-        // Cek kondisi cahaya lingkungan
-        sensorEventListener = object : SensorEventListener {
-            @RequiresApi(Build.VERSION_CODES.M)
-            override fun onSensorChanged(event: SensorEvent?) {
-                if (event != null && event.sensor.type == Sensor.TYPE_LIGHT) {
-                    val lightValue = event.values[0]
-                    if (lightValue < 1) { // Ubah nilai 10 sesuai dengan kebutuhan
-                        val cameraListId = CameraM.cameraIdList[0]
-                        CameraM.setTorchMode(cameraListId, true)
-                    } else {
-                        val cameraListId = CameraM.cameraIdList[0]
-                        CameraM.setTorchMode(cameraListId, false)
-                    }
-                }
-            }
-            override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
-            }
-        }
-        sensorManager?.registerListener(sensorEventListener, lightSensor, SensorManager.SENSOR_DELAY_NORMAL)
+//sensor
+    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
+        // Tidak digunakan
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
-    private fun changeFlashMode(v: View?) {
-        flashMode = (flashMode + 1) % 3
+    override fun onSensorChanged(event: SensorEvent?) {
+        event?.let {
+            if (it.sensor.type == Sensor.TYPE_LIGHT) {
+                val lightValue = event.values[0]
 
-        // Simpan mode flash saat ini ke SharedPreferences
-        editor.putInt("flashMode", flashMode)
-        editor.apply()
+                // Mengatur batas nilai cahaya yang menandakan kegelapan
+                val darkThreshold = 1
 
-        // Set flash mode
-        val cameraListId = CameraM.cameraIdList[0]
-        val cameraManager = getSystemService(Context.CAMERA_SERVICE) as CameraManager
-        val params = cameraManager.getCameraCharacteristics(cameraListId)
-            .get(CameraCharacteristics.FLASH_INFO_AVAILABLE)
-        if (params != null) {
-            when (flashMode) {
-                0 -> {
-                    Toast.makeText(this, "Flash mode AUTO", Toast.LENGTH_SHORT).show()
-                    flashButton.setImageResource(R.drawable.flash_auto)
-                    registerLightSensorListener()
-                }
-                1 -> {
-                    Toast.makeText(this, "Flash mode OFF", Toast.LENGTH_SHORT).show()
-                    flashButton.setImageResource(R.drawable.flash_off)
-                    CameraM.setTorchMode(cameraListId, false)
-                    sensorManager?.unregisterListener(sensorEventListener)
-                }
-                2 -> {
-                    Toast.makeText(this, "Flash mode ON", Toast.LENGTH_SHORT).show()
-                    flashButton.setImageResource(R.drawable.flash_on)
-                    CameraM.setTorchMode(cameraListId, true)
-                    sensorManager?.unregisterListener(sensorEventListener)
+                if (!isFlashOn && lightValue <= darkThreshold && !isDark) {
+                    // Terdeteksi kegelapan, lakukan instruksi untuk mengaktifkan tombol flash
+
+                    // Instruksi menggunakan TTS
+                    speakInstruction("Kegelapan terdeteksi. Tekan tombol flash untuk menyalakan senter.")
+
+                    // Atau instruksi menggunakan TextView
+//                     output.text = "Kegelapan terdeteksi. Tekan tombol flash untuk menyalakan lampu kilat."
+
+                    isDark = true
+                } else if (lightValue > darkThreshold && isDark) {
+                    // Terang, tidak perlu instruksi
+
+                    // Atau instruksi menggunakan TextView
+                    // output.text = ""
+
+                    isDark = false
                 }
             }
         }
     }
 
-    override fun onClick(v: View?) {
-        when (v?.id) {
-            R.id.imageButtonKodeku -> {
-                val halamanKodeku = Intent(this@MainActivity, Kodeku:: class.java)
-                startActivity(halamanKodeku)
-            }
-
-        }
+    private fun speakInstruction(instruction: String) {
+        tts.speak(instruction, TextToSpeech.QUEUE_FLUSH, null, null)
     }
+//sensor close
 
 }

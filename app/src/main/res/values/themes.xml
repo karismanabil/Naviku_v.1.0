@@ -2,19 +2,16 @@
     <!-- Base application theme. -->
     <style name="Theme.Naviku_versi_karisma" parent="Theme.MaterialComponents.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_700</item>
-        <item name="colorPrimaryVariant">@color/purple_200</item>
+        <item name="colorPrimary">@color/purple_dark</item>
+        <item name="colorPrimaryVariant">@color/purple_light</item>
         <item name="colorOnPrimary">@color/white_01</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/purple_700</item>
-        <item name="colorSecondaryVariant">@color/purple_200</item>
+        <item name="colorSecondary">@color/purple_dark</item>
+        <item name="colorSecondaryVariant">@color/purple_light</item>
         <item name="colorOnSecondary">@color/white_01</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">@color/purple_200</item>
+        <item name="android:statusBarColor">@color/purple_light</item>
         <!-- Customize your theme here. -->
-<!--        <item name="android:fontFamily">@font/Inter-Bold</item>-->
-
-<!--            font-->
     </style>
 <!--    splash screen-->
     <style name="SplashScreenTheme" parent="Theme.MaterialComponents.NoActionBar">
@@ -24,15 +21,15 @@
 
     <!--    splash screen-->
     <style name="KodekuTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">@color/purple_700</item>
-        <item name="colorPrimaryVariant">@color/purple_200</item>
+        <item name="colorPrimary">@color/purple_dark</item>
+        <item name="colorPrimaryVariant">@color/purple_light</item>
         <item name="colorOnPrimary">@color/white_01</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/purple_700</item>
-        <item name="colorSecondaryVariant">@color/purple_200</item>
+        <item name="colorSecondary">@color/purple_dark</item>
+        <item name="colorSecondaryVariant">@color/purple_light</item>
         <item name="colorOnSecondary">@color/white_01</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">@color/purple_200</item>
+        <item name="android:statusBarColor">@color/purple_light</item>
         <!-- Customize your theme here. -->
     </style>
 </resources>
