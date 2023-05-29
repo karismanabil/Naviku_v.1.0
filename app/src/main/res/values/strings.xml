@@ -11,4 +11,12 @@
     <string name="naviku">Naviku</string>
     <string name="halaman_kodeku">Halaman Kodeku</string>
     <string name="default_hasil">Lakukan Pemindaian dengan mengarahkan kamera ke QR Code</string>
+
+    <string-array name="data_category">
+        <item>Kode Pribadi</item>
+    </string-array>
+
+    <integer-array name="data_icon">
+        <item>@drawable/kode_pribadi</item>
+    </integer-array>
 </resources>
