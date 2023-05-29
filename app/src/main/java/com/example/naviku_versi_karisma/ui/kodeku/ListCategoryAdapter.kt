@@ -1,4 +1,4 @@
-package com.example.naviku_versi_karisma
+package com.example.naviku_versi_karisma.ui.kodeku
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,6 +6,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.naviku_versi_karisma.data.model.Category
+import com.example.naviku_versi_karisma.R
 
 class ListCategoryAdapter(private val listCategory: ArrayList<Category>) : RecyclerView.Adapter<ListCategoryAdapter.ListViewHolder>() {
 

@@ -14,9 +14,17 @@
 
     <string-array name="data_category">
         <item>Kode Pribadi</item>
+        <item>Ruangan</item>
+        <item>Benda</item>
+        <item>Rambu</item>
+        <item>Angka</item>
     </string-array>
 
     <integer-array name="data_icon">
         <item>@drawable/kode_pribadi</item>
+        <item>@drawable/ruangan_icon</item>
+        <item>@drawable/benda_icon</item>
+        <item>@drawable/rambu_icon</item>
+        <item>@drawable/angka_icon</item>
     </integer-array>
 </resources>

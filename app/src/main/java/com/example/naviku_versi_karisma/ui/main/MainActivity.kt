@@ -1,7 +1,8 @@
-package com.example.naviku_versi_karisma
+package com.example.naviku_versi_karisma.ui.main
 
 import android.Manifest
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.hardware.Sensor
 import android.hardware.SensorEvent
@@ -18,6 +19,8 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.example.naviku_versi_karisma.ui.kodeku.Kodeku
+import com.example.naviku_versi_karisma.R
 import com.google.zxing.ResultPoint
 import com.journeyapps.barcodescanner.BarcodeCallback
 import com.journeyapps.barcodescanner.BarcodeResult
@@ -69,6 +72,16 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                 flashModeOff()
             } else {
                 flashModeOn()
+            }
+        }
+
+        // untuk pindah halaman ke Kodeku
+        val imageButtonKodeku: ImageButton = findViewById(R.id.imageButtonKodeku)
+        imageButtonKodeku.setOnClickListener {
+            // Aksi yang ingin dijalankan saat tombol di klik
+            if (it.id == R.id.imageButtonKodeku) {
+                val halamanKodeku = Intent(this@MainActivity, Kodeku:: class.java)
+                startActivity(halamanKodeku)
             }
         }
 
@@ -154,10 +167,14 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                         tts.speak(text, TextToSpeech.QUEUE_FLUSH, null, null)
 
                         // Mengganti latar belakang LinearLayout menjadi hijau
-                        linearLayout2.setBackgroundColor(ContextCompat.getColor(output.context, R.color.green__success_unduh_zoom_2x))
+                        linearLayout2.setBackgroundColor(ContextCompat.getColor(output.context,
+                            R.color.green__success_unduh_zoom_2x
+                        ))
 
                         // Mengganti warna latar belakang View strip2 menjadi hijau
-                        strip2.setBackgroundColor(ContextCompat.getColor(output.context, R.color.green__line))
+                        strip2.setBackgroundColor(ContextCompat.getColor(output.context,
+                            R.color.green__line
+                        ))
                     }
 
                     // Menghentikan timer yang ada sebelumnya

@@ -1,4 +1,4 @@
-package com.example.naviku_versi_karisma
+package com.example.naviku_versi_karisma.ui.kodeku
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -7,6 +7,9 @@ import android.view.View
 import android.widget.ImageButton
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.naviku_versi_karisma.data.model.Category
+import com.example.naviku_versi_karisma.R
+import com.example.naviku_versi_karisma.ui.main.MainActivity
 
 class Kodeku : AppCompatActivity(), View.OnClickListener {
 
@@ -25,6 +28,7 @@ class Kodeku : AppCompatActivity(), View.OnClickListener {
         rvCategories.setHasFixedSize(true)
 
         list.addAll(getListCategories())
+        showRecyclerList()
     }
 
     private fun getListCategories(): ArrayList<Category> {

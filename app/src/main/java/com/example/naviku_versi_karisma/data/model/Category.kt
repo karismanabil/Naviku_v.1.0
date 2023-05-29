@@ -1,4 +1,4 @@
-package com.example.naviku_versi_karisma
+package com.example.naviku_versi_karisma.data.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/black_01"
-    tools:context=".Kodeku">
+    tools:context=".ui.kodeku.Kodeku">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_category"

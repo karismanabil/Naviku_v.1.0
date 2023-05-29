@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/black_01"
-    tools:context=".MainActivity">
+    tools:context=".ui.main.MainActivity">
 
     <com.journeyapps.barcodescanner.DecoratedBarcodeView
         android:id="@+id/scannerView"
