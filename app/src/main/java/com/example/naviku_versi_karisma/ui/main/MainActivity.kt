@@ -1,6 +1,7 @@
 package com.example.naviku_versi_karisma.ui.main
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -8,8 +9,11 @@ import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
+import android.hardware.camera2.CameraCharacteristics
+import android.hardware.camera2.CameraManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.speech.tts.TextToSpeech
 import android.view.View
 import android.view.accessibility.AccessibilityEvent
@@ -47,7 +51,10 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     companion object {
         private const val CAMERA_PERMISSION_REQUEST_CODE = 1001
     }
+    private val welcomeText = "Selamat Datang di Naviku\n " +
+            "Memulai Pemindaian Kode Q R"
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Theme_Naviku_versi_karisma)
         super.onCreate(savedInstanceState)
@@ -58,6 +65,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             if (status != TextToSpeech.ERROR) {
                 // Set language to default
                 tts.language = Locale("id", "ID")
+                speakWelcomeMessage()
             }
         }
 
@@ -75,7 +83,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             }
         }
 
-        // untuk pindah halaman ke Kodeku
+//        // untuk pindah halaman ke Kodeku
 //        val imageButtonKodeku: ImageButton = findViewById(R.id.imageButtonKodeku)
 //        imageButtonKodeku.setOnClickListener {
 //            // Aksi yang ingin dijalankan saat tombol di klik
@@ -97,7 +105,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             val event = AccessibilityEvent.obtain()
             event.eventType = AccessibilityEvent.TYPE_ANNOUNCEMENT
             event.text.add("Selamat Datang di Naviku\n " +
-                    "Memulai Pemindaian QR Code")
+                    "Memulai Pemindaian Kode Q R")
             am.sendAccessibilityEvent(event)
         }
 
@@ -115,6 +123,18 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
     }
 
+    private fun speakWelcomeMessage() {
+        val am = getSystemService(Context.ACCESSIBILITY_SERVICE) as AccessibilityManager
+        if (am.isEnabled) {
+            val event = AccessibilityEvent.obtain()
+            event.eventType = AccessibilityEvent.TYPE_ANNOUNCEMENT
+            event.text.add(welcomeText)
+            am.sendAccessibilityEvent(event)
+        } else {
+            tts.speak(welcomeText, TextToSpeech.QUEUE_FLUSH, null, null)
+        }
+    }
+
     override fun onResume() {
         super.onResume()
         barcodeView.resume()
@@ -123,6 +143,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         lightSensor?.let {
             sensorManager.registerListener(this, it, SensorManager.SENSOR_DELAY_NORMAL)
         }
+        speakWelcomeMessage()
     }
 
     override fun onPause() {
@@ -203,39 +224,43 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         // Tidak digunakan
     }
 
+    private var isSpeaking = false
     override fun onSensorChanged(event: SensorEvent?) {
         event?.let {
             if (it.sensor.type == Sensor.TYPE_LIGHT) {
                 val lightValue = event.values[0]
-
-                // Mengatur batas nilai cahaya yang menandakan kegelapan
                 val darkThreshold = 1
 
-                if (!isFlashOn && lightValue <= darkThreshold && !isDark) {
-                    // Terdeteksi kegelapan, lakukan instruksi untuk mengaktifkan tombol flash
+                val isDark = lightValue <= darkThreshold
 
-                    // Instruksi menggunakan TTS
+                if (!isFlashOn && isDark && !isSpeaking) {
                     speakInstruction("Kegelapan terdeteksi. Tekan tombol flash untuk menyalakan senter.")
-
-                    // Atau instruksi menggunakan TextView
-//                     output.text = "Kegelapan terdeteksi. Tekan tombol flash untuk menyalakan lampu kilat."
-
-                    isDark = true
-                } else if (lightValue > darkThreshold && isDark) {
-                    // Terang, tidak perlu instruksi
-
-                    // Atau instruksi menggunakan TextView
-                    // output.text = ""
-
-                    isDark = false
+                    startInstructionLoop("Kegelapan terdeteksi. Tekan tombol flash untuk menyalakan senter.")
+                } else if (!isDark) {
+                    stopInstructionLoop()
                 }
             }
         }
     }
 
+    private fun startInstructionLoop(instruction: String) {
+        isSpeaking = true
+        val handler = Handler()
+        handler.postDelayed({
+            speakInstruction(instruction)
+            if (isSpeaking) {
+                startInstructionLoop(instruction)
+            } else {
+                stopInstructionLoop()
+            }
+        }, 5000) // Delay selama 5 detik (5000 millis)
+    }
+
+    private fun stopInstructionLoop() {
+        isSpeaking = false
+    }
+
     private fun speakInstruction(instruction: String) {
         tts.speak(instruction, TextToSpeech.QUEUE_FLUSH, null, null)
     }
-//sensor close
-
 }
