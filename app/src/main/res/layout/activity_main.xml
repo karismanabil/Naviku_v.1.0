@@ -33,26 +33,24 @@
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="125dp"
         android:background="@color/black_03"
         android:orientation="horizontal"
         android:paddingHorizontal="8dp"
-        android:paddingVertical="40dp"
         app:layout_constraintBottom_toTopOf="@+id/strip"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scannerView">
 
         <TextView
             android:id="@+id/output"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:textSize="20sp"
             android:lineHeight="30sp"
             android:text="@string/default_hasil"
             android:textColor="@color/white_01"
-            app:layout_constraintEnd_toEndOf="@+id/scannerView"
-            app:layout_constraintStart_toStartOf="@+id/scannerView"
-            app:layout_constraintTop_toBottomOf="@+id/scannerView" />
+            android:layout_gravity="center"/>
     </LinearLayout>
 
     <View
@@ -101,16 +99,16 @@
 <!--            android:contentDescription="@string/zoom2x"-->
 <!--            app:srcCompat="@drawable/zoom2x" />-->
 
-<!--        <ImageButton-->
-<!--            android:id="@+id/imageButtonKodeku"-->
-<!--            style="@style/Widget.AppCompat.ImageButton"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:layout_marginHorizontal="6dp"-->
-<!--            android:layout_weight="0"-->
-<!--            android:background="@color/black_02"-->
-<!--            android:contentDescription="@string/kodeku"-->
-<!--            app:srcCompat="@drawable/kodeku" />-->
+        <ImageButton
+            android:id="@+id/imageButtonKodeku"
+            style="@style/Widget.AppCompat.ImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="6dp"
+            android:layout_weight="0"
+            android:background="@color/black_02"
+            android:contentDescription="@string/kodeku"
+            app:srcCompat="@drawable/kodeku" />
     </LinearLayout>
 
 

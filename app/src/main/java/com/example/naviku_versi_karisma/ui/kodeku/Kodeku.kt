@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.naviku_versi_karisma.data.model.Category
 import com.example.naviku_versi_karisma.R
+import com.example.naviku_versi_karisma.ui.kode_pribadi.PersonalCodeListActivity
 import com.example.naviku_versi_karisma.ui.main.MainActivity
 
 class Kodeku : AppCompatActivity(), View.OnClickListener {
@@ -46,6 +47,14 @@ class Kodeku : AppCompatActivity(), View.OnClickListener {
         rvCategories.layoutManager = LinearLayoutManager(this)
         val listCategoryAdapter = ListCategoryAdapter(list)
         rvCategories.adapter = listCategoryAdapter
+
+        listCategoryAdapter.setOnItemClickCallback(object : ListCategoryAdapter.OnItemClickCallback {
+            override fun onItemClicked(category: Category) {
+                val moveIntentCategoryDetail = Intent(this@Kodeku, PersonalCodeListActivity::class.java)
+                moveIntentCategoryDetail.putExtra("Data", category)
+                startActivity(moveIntentCategoryDetail)
+            }
+        })
     }
 
     override fun onClick(v: View?) {

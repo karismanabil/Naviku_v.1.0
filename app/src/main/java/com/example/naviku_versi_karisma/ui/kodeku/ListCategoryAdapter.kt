@@ -8,24 +8,37 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.naviku_versi_karisma.data.model.Category
 import com.example.naviku_versi_karisma.R
+import com.example.naviku_versi_karisma.databinding.ItemRowCategoryBinding
 
 class ListCategoryAdapter(private val listCategory: ArrayList<Category>) : RecyclerView.Adapter<ListCategoryAdapter.ListViewHolder>() {
 
-    class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val tvName: TextView = itemView.findViewById(R.id.tv_item_name)
-        val imgIcon: ImageView = itemView.findViewById(R.id.img_item_photo)
+    private lateinit var onItemClickCallback: OnItemClickCallback
+
+    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
-        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.item_row_category, parent, false)
-        return ListViewHolder(view)
+    class ListViewHolder(var binding: ItemRowCategoryBinding) : RecyclerView.ViewHolder(binding.root) {
+
+    }
+
+    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ListViewHolder {
+        val binding = ItemRowCategoryBinding.inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
+        return ListViewHolder(binding)
     }
 
     override fun getItemCount(): Int = listCategory.size
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         val (name, icon) = listCategory[position]
-        holder.tvName.text = name
-        holder.imgIcon.setImageResource(icon)
+        holder.binding.tvItemName.text = name
+        holder.binding.imgItemPhoto.setImageResource(icon)
+        holder.itemView.setOnClickListener {
+            onItemClickCallback.onItemClicked(listCategory[holder.adapterPosition])
+        }
+    }
+
+    interface OnItemClickCallback {
+        fun onItemClicked(category: Category)
     }
 }
