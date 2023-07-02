@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.naviku_versi_karisma.data.model.Category
 import com.example.naviku_versi_karisma.R
+import com.example.naviku_versi_karisma.ui.add.AddActivity
 import com.example.naviku_versi_karisma.ui.main.MainActivity
 
 class Kodeku : AppCompatActivity(), View.OnClickListener {
@@ -23,6 +24,8 @@ class Kodeku : AppCompatActivity(), View.OnClickListener {
 
         val imageButtonBeranda: ImageButton = findViewById(R.id.imageButton_Beranda)
         imageButtonBeranda.setOnClickListener(this)
+        val imageButtonBuat: ImageButton = findViewById(R.id.imageButtonBuat)
+        imageButtonBuat.setOnClickListener(this)
 
         rvCategories = findViewById(R.id.rv_category)
         rvCategories.setHasFixedSize(true)
@@ -53,6 +56,10 @@ class Kodeku : AppCompatActivity(), View.OnClickListener {
             R.id.imageButton_Beranda -> {
                 val halamanBeranda = Intent(this@Kodeku, MainActivity:: class.java)
                 startActivity(halamanBeranda)
+            }
+            R.id.imageButtonUnduh -> {
+                val halamanadd = Intent(this@Kodeku, AddActivity:: class.java)
+                startActivity(halamanadd)
             }
 
         }

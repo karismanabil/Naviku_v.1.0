@@ -19,7 +19,7 @@
         <item name="android:statusBarColor">@color/black_01</item>
     </style>
 
-    <!--    splash screen-->
+<!--    halaman kodeku-->
     <style name="KodekuTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/purple_dark</item>
         <item name="colorPrimaryVariant">@color/purple_light</item>
@@ -31,5 +31,25 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/purple_light</item>
         <!-- Customize your theme here. -->
+    </style>
+
+    <!--  halaman add-->
+    <style name="addtheme" parent="Theme.AppCompat.Light">
+        <item name="colorPrimary">@color/purple_dark</item>
+        <item name="colorPrimaryVariant">@color/purple_light</item>
+        <item name="colorOnPrimary">@color/white_01</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/purple_dark</item>
+        <item name="colorSecondaryVariant">@color/purple_light</item>
+        <item name="colorOnSecondary">@color/white_01</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@color/purple_light</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
+        <!-- Customize your theme here -->
+        <item name="windowActionBar">true</item>
+        <item name="windowNoTitle">false</item>
     </style>
 </resources>

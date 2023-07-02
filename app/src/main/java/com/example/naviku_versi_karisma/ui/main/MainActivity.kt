@@ -75,15 +75,15 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             }
         }
 
-        // untuk pindah halaman ke Kodeku
-//        val imageButtonKodeku: ImageButton = findViewById(R.id.imageButtonKodeku)
-//        imageButtonKodeku.setOnClickListener {
-//            // Aksi yang ingin dijalankan saat tombol di klik
-//            if (it.id == R.id.imageButtonKodeku) {
-//                val halamanKodeku = Intent(this@MainActivity, Kodeku:: class.java)
-//                startActivity(halamanKodeku)
-//            }
-//        }
+//         untuk pindah halaman ke Kodeku
+        val imageButtonKodeku: ImageButton = findViewById(R.id.imageButtonKodeku)
+        imageButtonKodeku.setOnClickListener {
+            // Aksi yang ingin dijalankan saat tombol di klik
+            if (it.id == R.id.imageButtonKodeku) {
+                val halamanKodeku = Intent(this@MainActivity, Kodeku:: class.java)
+                startActivity(halamanKodeku)
+            }
+        }
 
 //         sensor
         // Inisialisasi SensorManager

@@ -33,4 +33,6 @@
         <item name="android:statusBarColor">@color/purple_light</item>
         <!-- Customize your theme here. -->
     </style>
+
+
 </resources>

@@ -10,7 +10,11 @@
     <string name="beranda">Kembali ke Halaman Beranda</string>
     <string name="naviku">Naviku</string>
     <string name="halaman_kodeku">Halaman Kodeku</string>
-    <string name="default_hasil">Lakukan Pemindaian dengan mengarahkan kamera ke QR Code</string>
+    <string name="default_hasil">Lakukan Pemindaian dengan mengarahkan kamera ke QR Code  </string>
+    <string name="deskripsi_head">Deskripsi Kode QR</string>
+    <string name="deskripsi_subhead">Silakan mengisi kotak input dibawah dengan teks yang Anda inginkan.</string>
+    <string name="hint_input">Silakan mengisi kotak input dengan teks yang Anda inginkan.</string>
+    <string name="Button_Simpan">Simpan Kode QR</string>
 
     <string-array name="data_category">
         <item>Kode Pribadi</item>
