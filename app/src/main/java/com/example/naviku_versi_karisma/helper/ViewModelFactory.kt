@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.naviku_versi_karisma.ui.add.AddCodeViewModel
+import com.example.naviku_versi_karisma.ui.detail_kode_pribadi.PersonalCodeDetailViewModel
 import com.example.naviku_versi_karisma.ui.kode_pribadi.PersonalCodeListViewModel
 
 class ViewModelFactory private constructor(private val mApplication: Application) : ViewModelProvider.NewInstanceFactory(){
@@ -29,6 +30,8 @@ class ViewModelFactory private constructor(private val mApplication: Application
             return PersonalCodeListViewModel(mApplication) as T
         } else if (modelClass.isAssignableFrom(AddCodeViewModel::class.java)) {
             return AddCodeViewModel(mApplication) as T
+        } else if (modelClass.isAssignableFrom(PersonalCodeDetailViewModel::class.java)) {
+            return PersonalCodeDetailViewModel(mApplication) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
     }

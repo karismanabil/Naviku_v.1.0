@@ -1,5 +1,6 @@
 package com.example.naviku_versi_karisma.ui.kode_pribadi
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -7,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.naviku_versi_karisma.data.local.Code
 import com.example.naviku_versi_karisma.databinding.ItemRowCodeBinding
 import com.example.naviku_versi_karisma.helper.CodeDiffCallback
+import com.example.naviku_versi_karisma.ui.detail_kode_pribadi.PersonalCodeDetailActivity
 
 class CodeAdapter : RecyclerView.Adapter<CodeAdapter.CodeViewHolder>() {
 
@@ -24,6 +26,11 @@ class CodeAdapter : RecyclerView.Adapter<CodeAdapter.CodeViewHolder>() {
         fun bind(code: Code) {
             with(binding) {
                 tvItemName.text = code.name
+                cvItemCode.setOnClickListener {
+                    val intent = Intent(it.context, PersonalCodeDetailActivity::class.java)
+                    intent.putExtra(PersonalCodeDetailActivity.EXTRA_CODE, code)
+                    it.context.startActivity(intent)
+                }
             }
         }
     }

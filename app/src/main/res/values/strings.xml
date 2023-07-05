@@ -5,14 +5,18 @@
     <string name="kodeku">Halaman Kodeku</string>
     <string name="settings">Settings</string>
     <string name="buat">Buat Kode Pribadi</string>
-    <string name="unduh">Unduh Seluruh Kode</string>
-    <string name="kirim">Kirim Seluruh Kode</string>
+    <string name="unduh">Unduh Kode</string>
+    <string name="kirim">Kirim Kode</string>
+    <string name="hapus">Hapus Kode</string>
     <string name="beranda">Kembali ke Halaman Beranda</string>
     <string name="naviku">Naviku</string>
     <string name="halaman_kodeku">Halaman Kodeku</string>
-    <string name="default_hasil">Lakukan Pemindaian dengan mengarahkan kamera ke QR Code</string>
-    <string name="deskripsi_kode">Deskripsi Kode</string>
-    <string name="simpan_kode">Simpan Kode</string>
+    <string name="default_hasil">Lakukan Pemindaian dengan mengarahkan kamera ke QR Code  </string>
+    <string name="deskripsi_head">Deskripsi Kode QR</string>
+    <string name="deskripsi_subhead">Silakan mengisi kotak input dibawah dengan teks yang Anda inginkan.</string>
+    <string name="hint_input">Silakan mengisi kotak input dengan teks yang Anda inginkan.</string>
+    <string name="Button_Simpan">Simpan Kode QR</string>
+    <string name="deleted">Satu QR code berhasil dihapus</string>
 
     <string-array name="data_category">
         <item>Kode Pribadi</item>
