@@ -8,15 +8,27 @@
     android:background="@color/black_01"
     tools:context=".ui.kodeku.Kodeku">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_category"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    <ImageView
+        android:id="@+id/iv_code_img"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/kodeqr_nodata"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_code_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/iv_code_img"
+        app:layout_constraintStart_toStartOf="@+id/iv_code_img"
+        app:layout_constraintTop_toBottomOf="@+id/iv_code_img"
+       android:text="Nama QR Code" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -34,7 +46,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <ImageButton
-            android:id="@+id/btn_create_kodeku"
+            android:id="@+id/btn_download_code_detail"
             style="@style/Widget.AppCompat.ImageButton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -42,22 +54,10 @@
             android:layout_weight="0"
             android:background="@color/black_02"
             android:contentDescription="@string/buat"
-            app:srcCompat="@drawable/buat" />
+            app:srcCompat="@drawable/unduh" />
 
         <ImageButton
-            android:id="@+id/btn_download_kodeku"
-            style="@style/Widget.AppCompat.ImageButton"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginHorizontal="6dp"
-            android:layout_weight="0"
-            android:background="@color/black_02"
-            android:contentDescription="@string/unduh"
-            app:srcCompat="@drawable/unduh"
-            tools:ignore="DuplicateIds" />
-
-        <ImageButton
-            android:id="@+id/btn_send_kodeku"
+            android:id="@+id/btn_share_code_detail"
             style="@style/Widget.AppCompat.ImageButton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -68,7 +68,18 @@
             app:srcCompat="@drawable/kirim" />
 
         <ImageButton
-            android:id="@+id/btn_home_kodeku"
+            android:id="@+id/btn_delete_code_detail"
+            style="@style/Widget.AppCompat.ImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="6dp"
+            android:layout_weight="0"
+            android:background="@color/black_02"
+            android:contentDescription="@string/hapus"
+            app:srcCompat="@drawable/delete" />
+
+        <ImageButton
+            android:id="@+id/btn_home_code_detail"
             style="@style/Widget.AppCompat.ImageButton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"

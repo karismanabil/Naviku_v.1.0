@@ -6,10 +6,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/black_01"
-    tools:context=".ui.kodeku.Kodeku">
+    tools:context=".ui.kode_pribadi.PersonalCodeListActivity">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_category"
+        android:id="@+id/rv_codes"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
@@ -34,7 +34,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <ImageButton
-            android:id="@+id/btn_create_kodeku"
+            android:id="@+id/btn_create_code_list"
             style="@style/Widget.AppCompat.ImageButton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -45,7 +45,7 @@
             app:srcCompat="@drawable/buat" />
 
         <ImageButton
-            android:id="@+id/btn_download_kodeku"
+            android:id="@+id/btn_download_code_list"
             style="@style/Widget.AppCompat.ImageButton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -57,7 +57,7 @@
             tools:ignore="DuplicateIds" />
 
         <ImageButton
-            android:id="@+id/btn_send_kodeku"
+            android:id="@+id/btn_send_code_list"
             style="@style/Widget.AppCompat.ImageButton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -68,7 +68,7 @@
             app:srcCompat="@drawable/kirim" />
 
         <ImageButton
-            android:id="@+id/btn_home_kodeku"
+            android:id="@+id/btn_home_code_list"
             style="@style/Widget.AppCompat.ImageButton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
