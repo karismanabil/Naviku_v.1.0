@@ -43,7 +43,7 @@
         app:layout_constraintTop_toBottomOf="@+id/scannerView">
 
         <TextView
-            android:id="@+id/output"
+            android:id="@+id/tv_output"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp"
@@ -78,7 +78,7 @@
 
 
         <ImageButton
-            android:id="@+id/flashButt"
+            android:id="@+id/btn_flash"
             style="@style/Widget.AppCompat.ImageButton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -88,19 +88,8 @@
             android:contentDescription="@string/flash_auto"
             app:srcCompat="@drawable/flash_off" />
 
-<!--        <ImageButton-->
-<!--            android:id="@+id/zoomButt"-->
-<!--            style="@style/Widget.AppCompat.ImageButton"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:layout_marginHorizontal="6dp"-->
-<!--            android:layout_weight="0"-->
-<!--            android:background="@color/black_02"-->
-<!--            android:contentDescription="@string/zoom2x"-->
-<!--            app:srcCompat="@drawable/zoom2x" />-->
-
         <ImageButton
-            android:id="@+id/imageButtonKodeku"
+            android:id="@+id/btn_kodeku"
             style="@style/Widget.AppCompat.ImageButton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"

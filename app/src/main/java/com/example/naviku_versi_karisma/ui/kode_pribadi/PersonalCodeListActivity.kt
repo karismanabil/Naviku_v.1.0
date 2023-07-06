@@ -36,12 +36,12 @@ class PersonalCodeListActivity : AppCompatActivity() {
         binding?.rvCodes?.setHasFixedSize(true)
         binding?.rvCodes?.adapter = adapter
 
-        binding?.btnCreate?.setOnClickListener {
+        binding?.btnCreateCodeList?.setOnClickListener {
             val intent = Intent(this@PersonalCodeListActivity, AddCodeActivity::class.java)
             startActivity(intent)
         }
 
-        binding?.btnHome?.setOnClickListener {
+        binding?.btnHomeCodeList?.setOnClickListener {
             val intent = Intent(this@PersonalCodeListActivity, MainActivity::class.java)
             startActivity(intent)
         }

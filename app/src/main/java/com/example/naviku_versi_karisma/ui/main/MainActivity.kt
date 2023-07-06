@@ -9,8 +9,6 @@ import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
-import android.hardware.camera2.CameraCharacteristics
-import android.hardware.camera2.CameraManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -71,10 +69,10 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
         //scanner
         barcodeView = findViewById(R.id.scannerView)
-        output = findViewById(R.id.output)
+        output = findViewById(R.id.tv_output)
 
         //flash
-        flashButton = findViewById(R.id.flashButt)
+        flashButton = findViewById(R.id.btn_flash)
         flashButton.setOnClickListener {
             if (isFlashOn) {
                 flashModeOff()
@@ -84,10 +82,10 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         }
 
         // untuk pindah halaman ke Kodeku
-        val imageButtonKodeku: ImageButton = findViewById(R.id.imageButtonKodeku)
+        val imageButtonKodeku: ImageButton = findViewById(R.id.btn_kodeku)
         imageButtonKodeku.setOnClickListener {
             // Aksi yang ingin dijalankan saat tombol di klik
-            if (it.id == R.id.imageButtonKodeku) {
+            if (it.id == R.id.btn_kodeku) {
                 val halamanKodeku = Intent(this@MainActivity, Kodeku:: class.java)
                 startActivity(halamanKodeku)
             }

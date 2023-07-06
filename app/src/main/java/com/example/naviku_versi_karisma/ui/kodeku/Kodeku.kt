@@ -9,24 +9,33 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.naviku_versi_karisma.data.model.Category
 import com.example.naviku_versi_karisma.R
+import com.example.naviku_versi_karisma.databinding.ActivityKodekuBinding
+import com.example.naviku_versi_karisma.ui.add.AddCodeActivity
 import com.example.naviku_versi_karisma.ui.kode_pribadi.PersonalCodeListActivity
 import com.example.naviku_versi_karisma.ui.main.MainActivity
 
-class Kodeku : AppCompatActivity(), View.OnClickListener {
+class Kodeku : AppCompatActivity() {
 
-    private lateinit var rvCategories: RecyclerView
+    private lateinit var binding: ActivityKodekuBinding
     private val list = ArrayList<Category>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.KodekuTheme)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_kodeku)
+        binding = ActivityKodekuBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val imageButtonBeranda: ImageButton = findViewById(R.id.imageButton_Beranda)
-        imageButtonBeranda.setOnClickListener(this)
+        binding.btnHomeKodeku.setOnClickListener {
+            val homePage = Intent(this@Kodeku, MainActivity::class.java)
+            startActivity(homePage)
+        }
 
-        rvCategories = findViewById(R.id.rv_category)
-        rvCategories.setHasFixedSize(true)
+        binding.btnCreateKodeku.setOnClickListener {
+            val createPage = Intent(this@Kodeku, AddCodeActivity::class.java)
+            startActivity(createPage)
+        }
+
+        binding.rvCategory.setHasFixedSize(true)
 
         list.addAll(getListCategories())
         showRecyclerList()
@@ -44,9 +53,9 @@ class Kodeku : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun showRecyclerList() {
-        rvCategories.layoutManager = LinearLayoutManager(this)
+        binding.rvCategory.layoutManager = LinearLayoutManager(this)
         val listCategoryAdapter = ListCategoryAdapter(list)
-        rvCategories.adapter = listCategoryAdapter
+        binding.rvCategory.adapter = listCategoryAdapter
 
         listCategoryAdapter.setOnItemClickCallback(object : ListCategoryAdapter.OnItemClickCallback {
             override fun onItemClicked(category: Category) {
@@ -55,15 +64,5 @@ class Kodeku : AppCompatActivity(), View.OnClickListener {
                 startActivity(moveIntentCategoryDetail)
             }
         })
-    }
-
-    override fun onClick(v: View?) {
-        when (v?.id) {
-            R.id.imageButton_Beranda -> {
-                val halamanBeranda = Intent(this@Kodeku, MainActivity:: class.java)
-                startActivity(halamanBeranda)
-            }
-
-        }
     }
 }

@@ -1,23 +1,22 @@
 package com.example.naviku_versi_karisma.ui.add
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
-import com.example.naviku_versi_karisma.R
 import com.example.naviku_versi_karisma.data.local.Code
 import com.example.naviku_versi_karisma.databinding.ActivityAddCodeBinding
 import com.example.naviku_versi_karisma.helper.ViewModelFactory
+import com.example.naviku_versi_karisma.ui.detail_kode_pribadi.PersonalCodeDetailActivity
+import com.example.naviku_versi_karisma.ui.kode_pribadi.PersonalCodeListActivity
 
 class AddCodeActivity : AppCompatActivity() {
 
     companion object {
         const val EXTRA_CODE = "extra_code"
-        const val ALERT_DIALOG_CLOSE = 10
-        const val ALERT_DIALOG_DELETE = 20
     }
 
-    private var isEdit = false
     private var code: Code? = null
 
     private lateinit var addCodeViewModel: AddCodeViewModel
@@ -32,6 +31,7 @@ class AddCodeActivity : AppCompatActivity() {
 
         addCodeViewModel = obtainViewModel(this@AddCodeActivity)
 
+        @Suppress("DEPRECATION")
         code = intent.getParcelableExtra(EXTRA_CODE)
         code = Code()
 
@@ -47,6 +47,9 @@ class AddCodeActivity : AppCompatActivity() {
                     }
                     addCodeViewModel.insert(code as Code)
                     showToast("Code berhasil ditambahkan")
+
+                    val intent = Intent(this@AddCodeActivity, PersonalCodeListActivity::class.java)
+                    startActivity(intent)
                     finish()
                 }
             }

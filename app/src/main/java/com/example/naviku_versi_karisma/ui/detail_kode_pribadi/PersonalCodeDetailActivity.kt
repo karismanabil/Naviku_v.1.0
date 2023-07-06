@@ -13,6 +13,7 @@ import com.example.naviku_versi_karisma.data.local.Code
 import com.example.naviku_versi_karisma.databinding.ActivityPersonalCodeDetailBinding
 import com.example.naviku_versi_karisma.helper.ViewModelFactory
 import com.example.naviku_versi_karisma.ui.kode_pribadi.PersonalCodeListActivity
+import com.example.naviku_versi_karisma.ui.main.MainActivity
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.EncodeHintType
 import com.google.zxing.WriterException
@@ -23,8 +24,6 @@ class PersonalCodeDetailActivity : AppCompatActivity() {
 
     companion object {
         const val EXTRA_CODE = "extra_code"
-        const val ALERT_DIALOG_CLOSE = 10
-        const val ALERT_DIALOG_DELETE = 20
     }
 
     private var _activityPersonalCodeDetailBinding: ActivityPersonalCodeDetailBinding? = null
@@ -69,7 +68,7 @@ class PersonalCodeDetailActivity : AppCompatActivity() {
             }
         }
 
-        binding?.btnDelete?.setOnClickListener {
+        binding?.btnDeleteCodeDetail?.setOnClickListener {
             val alertDialogBuilder = AlertDialog.Builder(this@PersonalCodeDetailActivity)
             alertDialogBuilder.setTitle("Konfirmasi")
             alertDialogBuilder.setMessage("Apakah Anda yakin ingin menghapus kode ini?")
@@ -85,6 +84,11 @@ class PersonalCodeDetailActivity : AppCompatActivity() {
             }
             val alertDialog = alertDialogBuilder.create()
             alertDialog.show()
+        }
+
+        binding?.btnHomeCodeDetail?.setOnClickListener {
+            val intent = Intent(this@PersonalCodeDetailActivity, MainActivity::class.java)
+            startActivity(intent)
         }
     }
 

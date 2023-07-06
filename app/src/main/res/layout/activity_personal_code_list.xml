@@ -6,14 +6,17 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/black_01"
-    tools:context=".ui.kodeku.Kodeku">
+    tools:context=".ui.kode_pribadi.PersonalCodeListActivity">
 
-    <View
-        android:id="@+id/view"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_codes"
         android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/white_01"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout" />
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -31,7 +34,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <ImageButton
-            android:id="@+id/btn_create"
+            android:id="@+id/btn_create_code_list"
             style="@style/Widget.AppCompat.ImageButton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -42,7 +45,7 @@
             app:srcCompat="@drawable/buat" />
 
         <ImageButton
-            android:id="@+id/imageButtonUnduh"
+            android:id="@+id/btn_download_code_list"
             style="@style/Widget.AppCompat.ImageButton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -50,10 +53,11 @@
             android:layout_weight="0"
             android:background="@color/black_02"
             android:contentDescription="@string/unduh"
-            app:srcCompat="@drawable/unduh" />
+            app:srcCompat="@drawable/unduh"
+            tools:ignore="DuplicateIds" />
 
         <ImageButton
-            android:id="@+id/imageButtonKirim"
+            android:id="@+id/btn_send_code_list"
             style="@style/Widget.AppCompat.ImageButton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -64,7 +68,7 @@
             app:srcCompat="@drawable/kirim" />
 
         <ImageButton
-            android:id="@+id/btn_home"
+            android:id="@+id/btn_home_code_list"
             style="@style/Widget.AppCompat.ImageButton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -74,17 +78,5 @@
             android:contentDescription="@string/beranda"
             app:srcCompat="@drawable/beranda" />
     </LinearLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_codes"
-        android:layout_width="409dp"
-        android:layout_height="606dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="1dp"
-        app:layout_constraintBottom_toBottomOf="@+id/view"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
