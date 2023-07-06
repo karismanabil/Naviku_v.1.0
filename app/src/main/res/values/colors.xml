@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFD89FFF</color>
-    <color name="purple_500">#FFBA53FF</color>
-    <color name="purple_700">#FF7101BC</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
 
 <!--    Versi 1.0 Naviku-->
 
@@ -17,6 +10,7 @@
     <color name="red_flash_off">#FF700032</color>
     <color name="red_danger">#FFAF0000</color>
     <color name="green__success_unduh_zoom_2x">#FF00611C</color>
+    <color name="green__line">#FF57FF57</color>
     <color name="green_zoom_1x">#FF00615B</color>
     <color name="teal_beranda">#FF005C70</color>
     <color name="blue_buat">#FF004BBC</color>

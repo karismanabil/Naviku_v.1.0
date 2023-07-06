@@ -6,33 +6,17 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/black_01"
-    tools:context=".Kodeku">
+    tools:context=".ui.kodeku.Kodeku">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="166dp"
-        android:layout_marginTop="354dp"
-        android:layout_marginEnd="168dp"
-        android:layout_marginBottom="358dp"
-        android:background="@color/white_01"
-        android:text="@string/halaman_kodeku"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_category"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/white_01"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -50,7 +34,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <ImageButton
-            android:id="@+id/imageButtonBuat"
+            android:id="@+id/btn_create_kodeku"
             style="@style/Widget.AppCompat.ImageButton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -61,7 +45,7 @@
             app:srcCompat="@drawable/buat" />
 
         <ImageButton
-            android:id="@+id/imageButtonUnduh"
+            android:id="@+id/btn_download_kodeku"
             style="@style/Widget.AppCompat.ImageButton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -69,10 +53,11 @@
             android:layout_weight="0"
             android:background="@color/black_02"
             android:contentDescription="@string/unduh"
-            app:srcCompat="@drawable/unduh" />
+            app:srcCompat="@drawable/unduh"
+            tools:ignore="DuplicateIds" />
 
         <ImageButton
-            android:id="@+id/imageButtonKirim"
+            android:id="@+id/btn_send_kodeku"
             style="@style/Widget.AppCompat.ImageButton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -83,7 +68,7 @@
             app:srcCompat="@drawable/kirim" />
 
         <ImageButton
-            android:id="@+id/imageButton_Beranda"
+            android:id="@+id/btn_home_kodeku"
             style="@style/Widget.AppCompat.ImageButton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
