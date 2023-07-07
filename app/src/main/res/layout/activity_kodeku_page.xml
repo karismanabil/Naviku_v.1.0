@@ -6,17 +6,41 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/black_01"
-    tools:context=".ui.kodeku.Kodeku">
+    tools:context=".ui.kodeku.KodekuPage">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_category"
+    <LinearLayout
+        android:id="@+id/linearLayoutCategory"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:gravity="center_vertical|center_horizontal"
+        android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <ImageButton
+            android:id="@+id/CardkodePribadi"
+            style="@style/Widget.AppCompat.ImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="24dp"
+            android:background="@color/black_02"
+            android:contentDescription="@string/beranda"
+            app:srcCompat="@drawable/kode_pribadi" />
+
+        <ImageButton
+            android:id="@+id/CardkodeNaviku"
+            style="@style/Widget.AppCompat.ImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="24dp"
+            android:background="@color/black_02"
+            android:contentDescription="@string/beranda"
+            app:srcCompat="@drawable/kode_naviku" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -36,30 +60,7 @@
 
 
         <ImageButton
-            android:id="@+id/btn_download_kodeku"
-            style="@style/Widget.AppCompat.ImageButton"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginHorizontal="6dp"
-            android:layout_weight="0"
-            android:background="@color/black_02"
-            android:contentDescription="@string/unduh"
-            app:srcCompat="@drawable/unduh"
-            tools:ignore="DuplicateIds" />
-
-        <ImageButton
-            android:id="@+id/btn_send_kodeku"
-            style="@style/Widget.AppCompat.ImageButton"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginHorizontal="6dp"
-            android:layout_weight="0"
-            android:background="@color/black_02"
-            android:contentDescription="@string/kirim"
-            app:srcCompat="@drawable/kirim" />
-
-        <ImageButton
-            android:id="@+id/btn_kembali_code_list"
+            android:id="@+id/btn_home_kodeku"
             style="@style/Widget.AppCompat.ImageButton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -67,7 +68,6 @@
             android:layout_weight="0"
             android:background="@color/black_02"
             android:contentDescription="@string/beranda"
-            app:srcCompat="@drawable/kembali" />
+            app:srcCompat="@drawable/beranda" />
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

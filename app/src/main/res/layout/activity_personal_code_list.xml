@@ -14,9 +14,36 @@
         android:layout_height="match_parent"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+
+    <LinearLayout
+        android:id="@+id/emptyStateLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/imageNoData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/kodeqr_nodata" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_marginTop="24dp"
+            android:textColor="@color/white_01"
+
+            android:text="@string/belum_ada_data" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -45,38 +72,15 @@
             app:srcCompat="@drawable/buat" />
 
         <ImageButton
-            android:id="@+id/btn_download_code_list"
+            android:id="@+id/btn_kembali_code_list"
             style="@style/Widget.AppCompat.ImageButton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginHorizontal="6dp"
             android:layout_weight="0"
             android:background="@color/black_02"
-            android:contentDescription="@string/unduh"
-            app:srcCompat="@drawable/unduh"
-            tools:ignore="DuplicateIds" />
-
-        <ImageButton
-            android:id="@+id/btn_send_code_list"
-            style="@style/Widget.AppCompat.ImageButton"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginHorizontal="6dp"
-            android:layout_weight="0"
-            android:background="@color/black_02"
-            android:contentDescription="@string/kirim"
-            app:srcCompat="@drawable/kirim" />
-
-        <ImageButton
-            android:id="@+id/btn_home_code_list"
-            style="@style/Widget.AppCompat.ImageButton"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginHorizontal="6dp"
-            android:layout_weight="0"
-            android:background="@color/black_02"
-            android:contentDescription="@string/beranda"
-            app:srcCompat="@drawable/beranda" />
+            android:contentDescription="@string/kembali"
+            app:srcCompat="@drawable/kembali" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

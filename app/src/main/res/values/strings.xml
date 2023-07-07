@@ -17,9 +17,14 @@
     <string name="hint_input">Silakan mengisi kotak input dengan teks yang Anda inginkan.</string>
     <string name="Button_Simpan">Simpan Kode QR</string>
     <string name="deleted">Satu QR code berhasil dihapus</string>
+    <string name="kodepribadi">Kode Pribadi, Kumpulan Kode QR buatan sendiri</string>
+    <string name="kodenviku">Kode Naviku, Kumpulan Kode QR dari Naviku</string>
+    <string name="kembali">kembali</string>
+    <string name="belum_ada_data">Belum ada kode QR yang dibuat</string>
+
 
     <string-array name="data_category">
-        <item>Kode Pribadi</item>
+        <!--        <item>Kode Pribadi</item>-->
         <item>Ruangan</item>
         <item>Bangunan </item>
         <item>Benda</item>
@@ -28,7 +33,7 @@
     </string-array>
 
     <integer-array name="data_icon">
-        <item>@drawable/kode_pribadi</item>
+        <!--        <item>@drawable/kode_pribadi</item>-->
         <item>@drawable/ruangan_icon</item>
         <item>@drawable/tabler_building</item>
         <item>@drawable/benda_icon</item>
@@ -36,3 +41,13 @@
         <item>@drawable/angka_icon</item>
     </integer-array>
 </resources>
+
+
+    <!--<item>Bangunan </item>-->
+    <!--<item>Benda</item>-->
+    <!--<item>Rambu</item>-->
+    <!--<item>Angka</item>-->
+    <!--<item>@drawable/tabler_building</item>-->
+    <!--<item>@drawable/benda_icon</item>-->
+    <!--<item>@drawable/rambu_icon</item>-->
+    <!--<item>@drawable/angka_icon</item>-->

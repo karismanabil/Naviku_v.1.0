@@ -3,11 +3,13 @@ package com.example.naviku_versi_karisma.ui.kode_pribadi
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.naviku_versi_karisma.databinding.ActivityPersonalCodeListBinding
 import com.example.naviku_versi_karisma.helper.ViewModelFactory
 import com.example.naviku_versi_karisma.ui.add.AddCodeActivity
+import com.example.naviku_versi_karisma.ui.kodeku.KodekuPage
 import com.example.naviku_versi_karisma.ui.main.MainActivity
 
 class PersonalCodeListActivity : AppCompatActivity() {
@@ -25,8 +27,12 @@ class PersonalCodeListActivity : AppCompatActivity() {
 
         val personalCodeListViewModel = obtainViewModel(this@PersonalCodeListActivity)
         personalCodeListViewModel.getAllCodes().observe(this) { codeList ->
-            if (codeList != null) {
+            if (codeList != null && codeList.isNotEmpty()) {
                 adapter.setListCodes(codeList)
+                binding?.emptyStateLayout?.visibility = View.GONE
+            } else {
+                adapter.setListCodes(emptyList())
+                binding?.emptyStateLayout?.visibility = View.VISIBLE
             }
         }
 
@@ -41,8 +47,8 @@ class PersonalCodeListActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        binding?.btnHomeCodeList?.setOnClickListener {
-            val intent = Intent(this@PersonalCodeListActivity, MainActivity::class.java)
+        binding?.btnKembaliCodeList?.setOnClickListener {
+            val intent = Intent(this@PersonalCodeListActivity, KodekuPage::class.java)
             startActivity(intent)
         }
     }

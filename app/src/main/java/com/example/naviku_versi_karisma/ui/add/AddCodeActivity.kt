@@ -3,13 +3,16 @@ package com.example.naviku_versi_karisma.ui.add
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import com.example.naviku_versi_karisma.R
 import com.example.naviku_versi_karisma.data.local.Code
 import com.example.naviku_versi_karisma.databinding.ActivityAddCodeBinding
 import com.example.naviku_versi_karisma.helper.ViewModelFactory
 import com.example.naviku_versi_karisma.ui.detail_kode_pribadi.PersonalCodeDetailActivity
 import com.example.naviku_versi_karisma.ui.kode_pribadi.PersonalCodeListActivity
+import com.example.naviku_versi_karisma.ui.main.MainActivity
 
 class AddCodeActivity : AppCompatActivity() {
 
@@ -28,6 +31,17 @@ class AddCodeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         _activityAddCodeBinding = ActivityAddCodeBinding.inflate(layoutInflater)
         setContentView(binding?.root)
+
+        // untuk pindah halaman ke halaman home
+        val btnKembali: ImageButton = findViewById(R.id.btn_kembali_code_list)
+        btnKembali.setOnClickListener {
+            // Aksi yang ingin dijalankan saat tombol di klik
+            if (it.id == R.id.btn_kembali_code_list) {
+                val halamanPersonalList = Intent(this@AddCodeActivity, PersonalCodeListActivity:: class.java)
+                startActivity(halamanPersonalList)
+            }
+        }
+
 
         addCodeViewModel = obtainViewModel(this@AddCodeActivity)
 

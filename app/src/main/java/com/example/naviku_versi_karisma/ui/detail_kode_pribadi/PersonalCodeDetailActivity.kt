@@ -13,6 +13,7 @@ import com.example.naviku_versi_karisma.data.local.Code
 import com.example.naviku_versi_karisma.databinding.ActivityPersonalCodeDetailBinding
 import com.example.naviku_versi_karisma.helper.ViewModelFactory
 import com.example.naviku_versi_karisma.ui.kode_pribadi.PersonalCodeListActivity
+import com.example.naviku_versi_karisma.ui.kodeku.Kodeku
 import com.example.naviku_versi_karisma.ui.main.MainActivity
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.EncodeHintType
@@ -72,22 +73,22 @@ class PersonalCodeDetailActivity : AppCompatActivity() {
             val alertDialogBuilder = AlertDialog.Builder(this@PersonalCodeDetailActivity)
             alertDialogBuilder.setTitle("Konfirmasi")
             alertDialogBuilder.setMessage("Apakah Anda yakin ingin menghapus kode ini?")
-            alertDialogBuilder.setPositiveButton("Ya") { _, _ ->
+            alertDialogBuilder.setPositiveButton("Hapus") { _, _ ->
                 personalCodeDetailViewModel.delete(code as Code)
                 showToast(getString(R.string.deleted))
 
                 val intent = Intent(this@PersonalCodeDetailActivity, PersonalCodeListActivity::class.java)
                 startActivity(intent)
             }
-            alertDialogBuilder.setNegativeButton("Tidak") { dialog, _ ->
+            alertDialogBuilder.setNegativeButton("Batal") { dialog, _ ->
                 dialog.dismiss()
             }
             val alertDialog = alertDialogBuilder.create()
             alertDialog.show()
         }
 
-        binding?.btnHomeCodeDetail?.setOnClickListener {
-            val intent = Intent(this@PersonalCodeDetailActivity, MainActivity::class.java)
+        binding?.btnKembaliCodeList?.setOnClickListener {
+            val intent = Intent(this@PersonalCodeDetailActivity, PersonalCodeListActivity::class.java)
             startActivity(intent)
         }
     }

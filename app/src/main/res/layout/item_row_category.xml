@@ -15,8 +15,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:background="#222222">
+        android:background="#222222"
+        android:padding="8dp">
 
         <ImageView
             android:id="@+id/img_item_photo"
@@ -41,6 +41,7 @@
             card_view:layout_constraintTop_toTopOf="@+id/img_item_photo"
             tools:text="Nama Kategori"
             android:textColor="#FFFFFF"/>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

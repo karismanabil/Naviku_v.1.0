@@ -23,6 +23,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.naviku_versi_karisma.ui.kodeku.Kodeku
 import com.example.naviku_versi_karisma.R
+import com.example.naviku_versi_karisma.ui.kodeku.KodekuPage
 import com.google.zxing.ResultPoint
 import com.journeyapps.barcodescanner.BarcodeCallback
 import com.journeyapps.barcodescanner.BarcodeResult
@@ -86,8 +87,8 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         imageButtonKodeku.setOnClickListener {
             // Aksi yang ingin dijalankan saat tombol di klik
             if (it.id == R.id.btn_kodeku) {
-                val halamanKodeku = Intent(this@MainActivity, Kodeku:: class.java)
-                startActivity(halamanKodeku)
+                val halamanKodekuPage = Intent(this@MainActivity, KodekuPage:: class.java)
+                startActivity(halamanKodekuPage)
             }
         }
 

@@ -79,7 +79,7 @@
             app:srcCompat="@drawable/delete" />
 
         <ImageButton
-            android:id="@+id/btn_home_code_detail"
+            android:id="@+id/btn_kembali_code_list"
             style="@style/Widget.AppCompat.ImageButton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -87,7 +87,7 @@
             android:layout_weight="0"
             android:background="@color/black_02"
             android:contentDescription="@string/beranda"
-            app:srcCompat="@drawable/beranda" />
+            app:srcCompat="@drawable/kembali" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

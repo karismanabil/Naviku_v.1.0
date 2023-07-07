@@ -25,15 +25,11 @@ class Kodeku : AppCompatActivity() {
         binding = ActivityKodekuBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.btnHomeKodeku.setOnClickListener {
-            val homePage = Intent(this@Kodeku, MainActivity::class.java)
-            startActivity(homePage)
+        binding.btnKembaliCodeList.setOnClickListener {
+            val KodekuPage = Intent(this@Kodeku, KodekuPage::class.java)
+            startActivity(KodekuPage)
         }
 
-        binding.btnCreateKodeku.setOnClickListener {
-            val createPage = Intent(this@Kodeku, AddCodeActivity::class.java)
-            startActivity(createPage)
-        }
 
         binding.rvCategory.setHasFixedSize(true)
 
