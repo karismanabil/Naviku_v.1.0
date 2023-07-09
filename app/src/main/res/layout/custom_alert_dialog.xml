@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/black_02"
+    android:padding="20dp">
+
+
+
+    <TextView
+        android:id="@+id/dialogMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textSize="24sp"
+        android:lineHeight="34sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textColor="@color/white_01"
+        android:text="Apakah Anda yakin ingin menghapus kode ini?" />
+
+    <LinearLayout
+        android:id="@+id/ly_Button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="48dp">
+
+        <Button
+            android:id="@+id/btnNegative"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:background="@android:color/transparent"
+            android:textColor="@color/white_01"
+            android:text="Batal" />
+
+        <Button
+            android:id="@+id/btnPositive"
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="@color/red_danger"
+            android:text="Hapus"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:paddingVertical="16sp"
+            android:textColor="@color/white_01" />
+    </LinearLayout>
+
+</LinearLayout>

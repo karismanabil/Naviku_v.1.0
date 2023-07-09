@@ -58,6 +58,8 @@
             android:layout_width="match_parent"
             android:layout_height="64dp"
             android:layout_marginTop="32dp"
+            android:backgroundTint="@color/purple_dark"
+            android:textColor="@color/white_01"
             android:text="@string/Button_Simpan"
             android:textSize="16sp" />
 
@@ -66,10 +68,11 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:background="@color/black_02"
+        android:background="@drawable/ly_button"
         android:gravity="center_vertical|center_horizontal"
         android:orientation="horizontal"
         android:paddingHorizontal="18dp"
